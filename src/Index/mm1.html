@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queueing Calculator</title>
+    <link rel="stylesheet" href="/src/styles/mm1.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <header class="header">
+        <nav class="navigation">
+            <h1>M/M/1</h1>
+            <label for="theoryModalToggle" class="modal-link">Teoría</label>
+            <label for="aboutModalToggle" class="modal-link">Intrucciones</label>
+            <a href="https://github.com/tu_usuario" target="_blank">
+                <img src="../ima/logoGithub.png" alt="GitHub logo">
+            </a>
+        </nav>
+    </header>
+
+
+    <main class="container">
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="form-left">
+                    <h2>Formulario de Entrada</h2>
+                    <form id="queueForm">
+                        <label for="arrivalRate">Tasa de llegada (λ):</label>
+                        <input type="number" id="arrivalRate" name="arrivalRate" step="any" required>
+
+                        <label for="serviceRate">Tasa de servicio (μ):</label>
+                        <input type="number" id="serviceRate" name="serviceRate" step="any" required>
+
+                        <label for="nMin">Número mínimo de clientes (nMin):</label>
+                        <input type="number" id="nMin" name="nMin" min="0" value="0" required>
+
+                        <label for="nMax">Número máximo de clientes (nMax):</label>
+                        <input type="number" id="nMax" name="nMax" min="0" value="3" required>
+
+                        <button type="submit">Calcular</button>
+                    </form>
+                </div>
+                <div class="form-right">
+                    <h2>Resultados M/M/1</h2>
+                    <div id="resultDisplay" class="result-container">
+                        <!-- Tarjetas de resultados -->
+                    </div>
+            </div>
+            </div>
+        </div>
+    </main>
+
+     <!-- Modales -->
+    <!-- Modal de Teoría -->
+    <input type="checkbox" id="theoryModalToggle" class="modal-toggle">
+    <div class="modal" id="theoryModal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('theoryModalToggle').checked = false;">&times;</span>
+            <h2>Teoría del Método M/M/1</h2>
+        <p>El modelo M/M/1 es uno de los modelos más simples de teoría de colas, utilizado para analizar sistemas de espera en los cuales:</p>
+        <ul>
+            <li><strong>M</strong> indica que los tiempos de llegada siguen una distribución de Poisson.</li>
+            <li><strong>M</strong> indica que el tiempo de servicio sigue una distribución exponencial.</li>
+            <li><strong>1</strong> significa que hay un solo servidor atendiendo las llegadas.</li>
+        </ul>
+        <p>Este modelo se utiliza comúnmente para sistemas de colas simples, como una línea de espera en un banco o un sistema de atención telefónica con un único operador.</p>
+        
+        <h3>Parámetros del modelo M/M/1</h3>
+        <ul>
+            <li><strong>λ (Lambda):</strong> Tasa de llegada de clientes (número de clientes que llegan por unidad de tiempo).</li>
+            <li><strong>μ (Mu):</strong> Tasa de servicio (número de clientes que pueden ser atendidos por unidad de tiempo).</li>
+            <li><strong>ρ (Rho):</strong> Factor de utilización, que es la proporción del tiempo que el servidor está ocupado. Se calcula como ρ = λ / μ.</li>
+        </ul>
+
+         <p><h3>Propiedades del sistema M/M/1</h3>
+            Las propiedades principales del sistema M/M/1 son:</p>
+        <ul>
+            <li><strong>Tiempo promedio de espera en la cola (Wq):</strong> La fórmula para el tiempo promedio de espera en la cola es <em>Wq = λ / (μ * (μ - λ))</em>.</li>
+            <li><strong>Tiempo promedio en el sistema (W):</strong> El tiempo total que un cliente pasa en el sistema se calcula como <em>W = 1 / (μ - λ)</em>.</li>
+            <li><strong>Número promedio de clientes en la cola (Lq):</strong> El número promedio de clientes esperando en la cola es <em>Lq = λ² / (μ * (μ - λ))</em>.</li>
+            <li><strong>Número promedio de clientes en el sistema (L):</strong> El número promedio de clientes en el sistema es <em>L = λ / (μ - λ)</em>.</li>
+        </ul>
+
+       <p><h3>Condiciones para que el sistema sea estable</h3>
+        El sistema M/M/1 es estable si la tasa de llegada es menor que la tasa de servicio, es decir, <strong>λ < μ</strong>. Si este criterio no se cumple, el sistema estará en un estado de sobrecarga, y los clientes continuarán acumulándose en la cola sin ser atendidos.</p>
+        
+        <p>Este modelo es ideal para sistemas donde no hay grandes fluctuaciones en las tasas de llegada o servicio, y se utiliza principalmente para entender el comportamiento de sistemas de colas simples.</p>
+    </div>
+    </div>
+
+    <!-- Modal de Acerca de -->
+    <input type="checkbox" id="aboutModalToggle" class="modal-toggle">
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('aboutModalToggle').checked = false;">&times;</span>
+            <h2>Instrucciones</h2>
+    
+    <p>
+      Ingresar los datos corespondientes ha la tasa de llegada (λ) y la tasa de servicio (μ), el modelo calcula varias métricas clave del sistema de colas, como:
+    </p>
+    <ul>
+      <li><strong>Utilización (p):</strong> La fracción del tiempo que el servidor está ocupado.</li>
+      <li><strong>Probabilidad de que no haya clientes en el sistema (P0):</strong> La probabilidad de que el sistema esté vacío.</li>
+      <li><strong>Tiempo promedio de espera en la cola (Wq):</strong> El tiempo promedio que un cliente espera en la cola antes de ser atendido.</li>
+      <li><strong>Tiempo promedio de espera en el sistema (W):</strong> El tiempo total promedio que un cliente pasa en el sistema, incluyendo el tiempo de servicio.</li>
+      <li><strong>Número promedio de clientes en la cola (Lq):</strong> El número promedio de clientes que están esperando en la cola.</li>
+      <li><strong>Número promedio de clientes en el sistema (L):</strong> El número promedio de clientes en el sistema, incluyendo tanto los que están esperando como los que están siendo atendidos.</li>
+    </ul>
+
+    <p>
+            
+    </p> 
+    <p>
+        <h3>Condiciones para que el sistema sea estable</h3>
+    </p>
+
+    <p>
+        El sistema M/M/c es estable si la tasa de llegada es menor que la capacidad total de servicio, es decir, <strong>(λ >= μ).</strong>. Si λ >= μ, el sistema no puede manejar todas las llegadas y se produciría un colapso o sobrecarga.
+    </p>
+
+   
+  </div>
+
+        </div>
+    </div>
+    <script src="/src/script/mm1.js"></script>
+</body>-
+</html> 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queueing Calculator</title>
+    <link rel="stylesheet" href="/src/styles/principal.css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navigation">
+            <h1>Calculadora de Colas</h1>
+            <label for="theoryModalToggle" class="modal-link">Teoría</label>
+            <label for="aboutModalToggle" class="modal-link">Instrucciones</label>
+            <a href="https://github.com/tu_usuario" target="_blank">
+                <img src="../src/ima/logoGithub.png" alt="GitHub logo">
+            </a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="grid" id="gridContainer">
+            <section class="card" id="mm1">
+                <a href="/src/Index/mm1.html">
+                    <h2>M/M/1</h2>
+                    <p>Población infinita canal simple</p>
+                </a>
+            </section>
+            <section class="card" id="mmc">
+                <a href="/src/Index/mmc.html">
+                    <h2>M/M/c</h2>
+                    <p>Población infinita canal múltiple</p>
+                </a>
+            </section>
+            <section class="card" id="mmck">
+                <a href="/src/Index/mmck.html">
+                    <h2>M/M/c/k</h2>
+                    <p>Población finita canal múltiple</p>
+                </a>
+            </section>
+        </div>
+    </main>
+
+
+    
+    <!-- Modal de Teoría -->
+<input type="checkbox" id="theoryModalToggle" class="modal-toggle">
+<div class="modal">
+    <div class="modal-content">
+        <button class="close" onclick="document.getElementById('theoryModalToggle').checked = false;">&times;</button>
+        <h2>Teoría de Colas</h2>
+        <section>
+            <h3>¿Qué es la Teoría de Colas?</h3>
+            <p>
+                La <strong>Teoría de Colas</strong> es una rama de la matemática que estudia el comportamiento de los sistemas en los que se generan líneas o colas. Se enfoca en analizar cómo las entidades (como clientes, paquetes de datos o vehículos) esperan en cola para ser atendidos por uno o más servidores.
+            </p>
+        </section>
+        <section>
+             <p><h3>¿Para qué sirve?</h3>
+           
+            <uL>La teoría de colas es fundamental para mejorar la eficiencia operativa en sistemas que implican procesos de espera.
+
+               <p> <li>Optimización de servicios al cliente en centros de llamadas.</li>
+                <li>Mejoras en la eficiencia de redes de telecomunicaciones.</li></p>
+            </ul></p>
+        </section>
+        <section>
+            <p><h3>Conceptos Básicos</h3>
+            <ul>
+                <li><strong>Cliente</strong>: Una entidad que requiere atención, como un usuario o una tarea.</li>
+                <li><strong>Servidor</strong>: El recurso que atiende a los clientes, como un agente en un call center o un servidor de red.</li>
+            </ul>
+        </section>
+
+        <section>
+            <p><h3>Modelos de Teoría de Colas</h3>
+            <ul>
+                <li><strong>M/M/1</strong>: Un modelo de una sola cola y un solo servidor.</li>
+                <li><strong>M/M/c</strong>: Modelo con múltiples servidores.</li>
+                <li><strong>M/M/c/K</strong>: Modelo con múltiples servidores y una capacidad máxima del sistema.</li>
+            </ul></p>
+        </section>
+
+        <section>
+            <h3>Aplicaciones de la Teoría de Colas</h3>
+            <ul>
+                <li><strong>Centros de atención al cliente</strong></li>
+                <li><strong>Sistemas de tráfico</strong></li>
+            </ul>
+        </section>
+        <section>
+           <p> <h3>¿Cómo se utiliza?</h3>
+            El análisis de colas permite predecir el comportamiento de los sistemas en función de parámetros como la tasa de llegada y la tasa de servicio.
+            La teoría de colas es clave para la mejora de la experiencia del usuario y la reducción de costos</p>
+        </section>
+    </div>
+</div>
+
+<!-- Modal de Acerca de -->
+<input type="checkbox" id="aboutModalToggle" class="modal-toggle">
+<div class="modal">
+    <div class="modal-content">
+        <button class="close" onclick="document.getElementById('aboutModalToggle').checked = false;">&times;</button>
+        <h2>Instrucciones</h2>
+        <p>Bienvenido a la aplicación de cálculo de colas. Aquí podrás realizar cálculos relacionados con diferentes modelos.</p>
+        <p>Para comenzar, selecciona uno de los tres modos disponibles según el tipo de cálculo que deseas realizar:</p>
+        <ul>
+            <li><strong>M/M/1</strong>: Modelo básico con un solo servidor.</li>
+            <li><strong>M/M/c</strong>: Modelo con múltiples servidores.</li>
+            <li><strong>M/M/c/K</strong>: Modelo con múltiples servidores y una capacidad máxima del sistema.</li>
+        </ul>
+        <p>Haz clic en la opción correspondiente desde el menú principal para iniciar el cálculo.</p>
+    </div>
+</div>
+
+
+</body>
+</html>

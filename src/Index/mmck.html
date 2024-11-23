@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Colas M/M/c/K</title>
+    <link rel="stylesheet" href="/src/styles/mmck.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    
+    <header class="header">
+        
+        <nav class="navigation">
+            <h1>M/M/c/K</h1>
+            <label for="theoryModalToggle" class="modal-link">Teoría</label>
+            <label for="aboutModalToggle" class="modal-link">Instrucción</label>
+            <a href="https://github.com/tu_usuario" target="_blank">
+                <img src="../ima/logoGithub.png" alt="GitHub logo">
+            </a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="form-container">
+            <div class="form-wrapper">
+                <div class="form-left">
+                    <h2>Formulario de Entrada</h2>
+                    <form id="queueForm">
+                        <label for="arrivalRate">Tasa de llegada (λ):</label>
+                        <input type="number" id="arrivalRate" name="arrivalRate" step="any" required>
+
+                        <label for="serviceRate">Tasa de servicio (μ):</label>
+                        <input type="number" id="serviceRate" name="serviceRate" step="any" required>
+
+                        <label for="servers">Número de servidores (c):</label>
+                        <input type="number" id="servers" name="servers" min="1" required>
+
+                        <label for="capacity">Capacidad máxima del sistema (K):</label>
+                        <input type="number" id="capacity" name="capacity" min="1" required>
+
+                        <label for="nMin">Número mínimo de clientes (nMin):</label>
+                        <input type="number" id="nMin" name="nMin" min="0" value="0" required>
+
+                        <label for="nMax">Número máximo de clientes (nMax):</label>
+                        <input type="number" id="nMax" name="nMax" min="0" value="3" required>
+
+                        <button type="submit">Calcular</button>
+                    </form>
+                </div>
+                
+                <div class="form-right">
+                    <h2>Resultados M/M/c/K</h2>
+                    <div id="resultDisplay" class="result-container"></div>
+                        <!-- Tarjetas de resultados -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+       <!-- Modales -->
+    <!-- Modal de Teoría -->
+    <input type="checkbox" id="theoryModalToggle" class="modal-toggle">
+    <div class="modal" id="theoryModal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('theoryModalToggle').checked = false;">&times;</span>
+            <h2>Teoría del Método M/M/c/K</h2>
+        <p>El modelo M/M/c/K es una extensión del modelo M/M/1, en el cual:</p>
+        <ul>
+            <li><strong>M</strong> indica que las llegadas de clientes siguen una distribución de Poisson.</li>
+            <li><strong>M</strong> indica que el tiempo de servicio sigue una distribución exponencial.</li>
+            <li><strong>c</strong> es el número de servidores disponibles para atender a los clientes.</li>
+            <li><strong>K</strong> es la capacidad máxima del sistema (el número máximo de clientes que pueden estar en el sistema al mismo tiempo, incluyendo aquellos en servicio y en espera).</li>
+        </ul>
+        <p>Este modelo es útil para analizar sistemas con múltiples servidores y una capacidad limitada, como una estación de servicio o una cola en un centro de atención con varias cajas.</p>
+
+        <h3>Parámetros del modelo M/M/c/K</h3>
+        <ul>
+            <li><strong>λ (Lambda):</strong> Tasa de llegada de clientes (número de clientes que llegan por unidad de tiempo).</li>
+            <li><strong>μ (Mu):</strong> Tasa de servicio (número de clientes que pueden ser atendidos por unidad de tiempo por cada servidor).</li>
+            <li><strong>c:</strong> Número de servidores disponibles.</li>
+            <li><strong>K:</strong> Capacidad máxima del sistema (número total de clientes que pueden estar en el sistema, incluidos los que están en servicio y los que están en la cola).</li>
+            <li><strong>ρ (Rho):</strong> Factor de utilización por servidor, que es la proporción del tiempo que cada servidor está ocupado. Se calcula como ρ = λ / (c * μ).</li>
+        </ul>
+
+        <h3>Propiedades del sistema M/M/c/K</h3>
+        <p>Las propiedades principales del sistema M/M/c/K son:</p>
+        <ul>
+            <li><strong>Probabilidad de que el sistema esté vacío (P0):</strong> La probabilidad de que no haya ningún cliente en el sistema se calcula como: <em>P0 = 1 / (Σ desde n=0 hasta c-1 de (λ^n / n!) + ((λ^c / c!)(1 - λ / (c * μ))) )</em>.</li>
+            <li><strong>Probabilidad de que el sistema esté lleno (Pk):</strong> La probabilidad de que el sistema esté en su capacidad máxima (K) es: <em>Pk = ((λ^K / K!)(1 - λ / (c * μ))) / (Σ desde n=0 hasta c-1 de (λ^n / n!) + ((λ^c / c!)(1 - λ / (c * μ))) )</em>.</li>
+            <li><strong>Tiempo promedio de espera en la cola (Wq):</strong> El tiempo promedio de espera en la cola se calcula como: <em>Wq = (P0 * (λ^c / c!)) * ((1 / μ) * (c * μ - λ) / (c * μ - λ))</em>.</li>
+            <li><strong>Tiempo promedio en el sistema (W):</strong> El tiempo total que un cliente pasa en el sistema se calcula como: <em>W = Wq + 1 / μ</em>.</li>
+            <li><strong>Número promedio de clientes en la cola (Lq):</strong> El número promedio de clientes esperando en la cola es: <em>Lq = λ * Wq</em>.</li>
+            <li><strong>Número promedio de clientes en el sistema (L):</strong> El número promedio de clientes en el sistema es: <em>L = λ * W</em>.</li>
+        </ul>
+
+        <h3>Condiciones para que el sistema sea estable</h3>
+        <p>El sistema M/M/c/K es estable si la tasa de llegada es menor que la tasa de servicio por servidor, es decir, <strong>λ < c * μ</strong>, y si la capacidad máxima K no es superada. Si λ > c * μ, el sistema estará en sobrecarga.</p>
+
+        <p>Este modelo es útil en situaciones donde los recursos son limitados (como los servidores) y el sistema tiene una capacidad máxima definida, lo que puede representar sistemas con capacidad restringida como estaciones de servicio, sistemas de atención al cliente, etc.</p>
+    </div>
+
+    </div>
+
+    <!-- Modal de Acerca de -->
+    <input type="checkbox" id="aboutModalToggle" class="modal-toggle">
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('aboutModalToggle').checked = false;">&times;</span>
+            <h2>Instrucción</h2>
+    <p>
+        Ingresar los datos corespondientes ha la tasa de llegada (λ), la tasa de servicio (μ) y el número de servidores (c), el modelo calcula varias métricas importantes, como:
+    </p>
+    <ul>
+      <li><strong>Utilización (p):</strong> La fracción del tiempo que cada servidor está ocupado, calculada como p = λ / (c * μ).</li>
+      <li><strong>Probabilidad de que no haya clientes en el sistema (P0):</strong> La probabilidad de que el sistema esté vacío (es decir, sin clientes en la cola ni en servicio).</li>
+      <li><strong>Probabilidad de que haya exactamente n clientes en el sistema (Pn):</strong> La probabilidad de que haya exactamente n clientes en el sistema.</li>
+      <li><strong>Número promedio de clientes en la cola (Lq):</strong> El número promedio de clientes esperando en la cola antes de ser atendidos.</li>
+      <li><strong>Número promedio de clientes en el sistema (L):</strong> El número promedio de clientes en el sistema, incluyendo los que están siendo atendidos.</li>
+      <li><strong>Tiempo promedio de espera en la cola (Wq):</strong> El tiempo promedio que un cliente espera en la cola antes de ser atendido.</li>
+      <li><strong>Tiempo promedio de espera en el sistema (W):</strong> El tiempo total promedio que un cliente pasa en el sistema (incluyendo servicio y espera).</li>
+    </ul>
+        </div>
+
+    <script src="/src/script/mmck.js"></script>
+</body>
+</html>

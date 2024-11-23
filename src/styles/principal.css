@@ -1,0 +1,236 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 0.3%;
+    border-radius: 45px;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: linear-gradient(#e66465, #9198e5);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    color: rgb(18, 18, 18);
+}
+
+/* Estilos del header */
+.header {
+    padding: 1vmin;
+    width: 100%; /* Ocupará todo el ancho */
+    background-color: #fbfbfbd1;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.99);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
+.header nav a {
+    color: rgb(0, 0, 0);
+    margin-left: 38px;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navigation img {
+    width: 140px;
+    height: 7vh;
+    transition: 0.5s;
+    margin: 0%;
+    object-fit: cover;
+    color: rgb(218, 31, 31);
+}
+
+.navigation img:hover {
+    transform: scale(1.3);
+}
+
+.navigation a:hover {
+    text-decoration: none;
+    color: white;
+    box-shadow: #333;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 20px;
+    flex-direction: column;
+}
+
+/* Cuadrícula de opciones */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    justify-items: center;
+    max-width: 800px;
+    margin-bottom: 0px;
+}
+
+/* Estilos de las tarjetas */
+.card {
+    width: 230px;
+    padding: 50px;
+    background-color: #f9f9f9;
+    border: 3px solid #eae4e4;
+    border-radius: 35px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(194, 193, 197, 0.953);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(223, 220, 220, 0.934);
+}
+
+.card h2 {
+    font-size: 25px;
+    color: #333;
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Si las tarjetas contienen enlaces, se les quita el subrayado */
+.card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.modal-content {
+    overflow-y: scroll; /* Asegura que el contenido sea desplazable */
+    scrollbar-width: none; /* Oculta la barra de desplazamiento en navegadores compatibles */
+}
+
+.modal-content::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en navegadores basados en WebKit */
+}
+
+
+.modal-link {
+    font-size: 16px; /* Tamaño inicial */
+    cursor: pointer;
+    font-weight: 900; /* Siempre en negrita */
+    transition: font-size 0.3s ease; /* Opcional: suaviza el cambio de tamaño si deseas que cambie */
+}
+
+.modal-link:hover {
+    font-size: 20px; /* Aumenta el tamaño solo al pasar el cursor */
+}
+
+/* Modal avanzado con estilos adaptados */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.4); /* Fondo semitransparente */
+    backdrop-filter: blur(10px); /* Desenfoque del fondo */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.modal-toggle:checked + .modal {
+    display: block; /* Muestra el modal cuando el checkbox está marcado */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    border-radius: 20px;
+    width: 50%;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    animation: fadeInModal 0.5s ease-in-out;
+}
+
+.modal-content h2,
+.modal-content p {
+    margin-bottom: 1.5em; /* Espaciado entre párrafos */
+    line-height: 1.6; /* Ajusta la altura de línea para mejor legibilidad */
+    text-align: left;
+    color: #333;
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.modal-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.modal-content a {
+    color: rgb(29, 92, 255);
+    text-decoration: underline;
+}
+
+.close {
+    color: #666;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.close:hover {
+    color: #f00;
+    transform: scale(1.2);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
